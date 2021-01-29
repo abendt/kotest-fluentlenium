@@ -7,7 +7,7 @@ import io.kotest.matchers.string.shouldContain
 class HelloKoTestSpec : DescribeSpec() {
 
     init {
-        val fluentlenium = buildFluentlenium(initWebDriver = {
+        val fluentlenium = withFluentlenium(initWebDriver = {
             WebDriverManager.chromedriver().setup()
         })
 
