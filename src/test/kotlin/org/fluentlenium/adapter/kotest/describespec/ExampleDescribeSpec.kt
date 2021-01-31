@@ -1,10 +1,12 @@
-package org.fluentlenium.adapter.kotest
+package org.fluentlenium.adapter.kotest.describespec
 
 import io.github.bonigarcia.wdm.WebDriverManager
 import io.kotest.core.spec.Spec
 import io.kotest.matchers.string.shouldContain
+import org.fluentlenium.adapter.kotest.FluentDescribeSpec
+import org.fluentlenium.adapter.kotest.jq
 
-class HelloFluentDescribeSpec : FluentDescribeSpec() {
+class ExampleDescribeSpec : FluentDescribeSpec() {
 
     override fun beforeSpec(spec: Spec) {
         WebDriverManager.chromedriver().setup()
