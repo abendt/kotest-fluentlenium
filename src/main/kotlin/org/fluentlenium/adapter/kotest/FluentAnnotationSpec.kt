@@ -8,7 +8,10 @@ import org.fluentlenium.adapter.kotest.internal.KoTestFluentAdapter
 import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.configuration.ConfigurationFactoryProvider
 
-abstract class FluentAnnotationSpec internal constructor(private val fluentAdapter: KoTestFluentAdapter) : AnnotationSpec(), IFluentAdapter by fluentAdapter, TestRunnerAdapter {
+abstract class FluentAnnotationSpec internal constructor(private val fluentAdapter: KoTestFluentAdapter) :
+        AnnotationSpec(),
+        IFluentAdapter by fluentAdapter,
+        TestRunnerAdapter {
 
     constructor() : this(KoTestFluentAdapter())
 
