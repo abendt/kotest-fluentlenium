@@ -3,13 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.4.21"
     id("com.adarshr.test-logger") version "2.1.1"
-    id("io.qameta.allure") version "2.8.1"
-}
-
-allure {
-    version = "2.13.8"
-    autoconfigure = true
-    aspectjVersion = "1.9.6"
 }
 
 val isIdea = System.getProperty("idea.version") != null
