@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.fluentlenium.adapter.DefaultSharedMutator
 import org.fluentlenium.adapter.FluentAdapter
+import org.fluentlenium.adapter.FluentTestRunnerAdapter
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.TestRunnerCommon.*
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
@@ -90,6 +91,10 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
                 doScreenshot(testClass, testName, this@KoTestFluentAdapter, configuration)
                 doHtmlDump(testClass, testName, this@KoTestFluentAdapter, configuration)
             }
+        }
+
+        override suspend fun afterSpec(spec: Spec) {
+            FluentTestRunnerAdapter.classDriverCleanup(spec.javaClass)
         }
     }
 }

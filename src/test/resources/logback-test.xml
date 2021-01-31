@@ -12,9 +12,6 @@
         </encoder>
     </appender>
 
-    <logger name="io.qameta" level="DEBUG"/>
-    <logger name="smoketest" level="INFO" />
-    <logger name="config" level="INFO" />
     <logger name="io.kotlintest.provided" level="INFO" />
 
     <root level="WARN">
