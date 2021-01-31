@@ -19,9 +19,5 @@ class HelloFluentDescribeSpec : FluentDescribeSpec() {
 
             window().title() shouldContain "FluentLenium"
         }
-
-        it("can access annotation") {
-
-        }
     }
 }
