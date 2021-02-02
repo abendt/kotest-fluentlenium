@@ -24,8 +24,6 @@ abstract class FluentAnnotationSpec internal constructor(private val fluentAdapt
     override fun getConfiguration(): Configuration =
             ConfigurationFactoryProvider.newConfiguration(javaClass)
 
-    // what is TestRunnerAdapter actually needed for?
-
     override fun getTestClass(): Class<*> = javaClass
 
     override fun getTestMethodName(): String =

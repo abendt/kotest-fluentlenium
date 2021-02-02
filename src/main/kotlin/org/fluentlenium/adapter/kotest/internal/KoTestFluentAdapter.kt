@@ -39,9 +39,8 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
                 // as the tests are executed within a Coroutine it
                 // could be possible that the "same" thread executes mulitple tests and/or that one test is executed
                 // by mulitple Coroutines with different underlying Threads. need to investigate
-                println("DriverLifecyle $driverLifecycle will prohably not work as expected!")
 
-                throw IllegalArgumentException()
+                throw IllegalArgumentException("DriverLifecyle $driverLifecycle will prohably not work as expected!")
             }
         }
 
