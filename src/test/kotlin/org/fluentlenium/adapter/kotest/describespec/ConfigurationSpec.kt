@@ -6,7 +6,10 @@ import org.fluentlenium.configuration.ConfigurationProperties
 import org.fluentlenium.configuration.CustomProperty
 import org.fluentlenium.configuration.FluentConfiguration
 
-@FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM, custom = [CustomProperty(name = "foo", value = "bar")])
+@FluentConfiguration(
+    driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM,
+    custom = [CustomProperty(name = "foo", value = "bar")]
+)
 class ConfigurationSpec : FluentDescribeSpec() {
 
     override fun getBrowserTimeout(): Long = 4711
@@ -26,8 +29,14 @@ class ConfigurationSpec : FluentDescribeSpec() {
             browserTimeout shouldBe 4711
         }
 
-        it("custom property via property setter") {
+        it("custom property via property setter from outside") {
             getCustomProperty("customProp") shouldBe "myValue"
+        }
+
+        it("custom property via property setter") {
+            setCustomProperty("customProp", "myCustomValue")
+
+            getCustomProperty("customProp") shouldBe "myCustomValue"
         }
 
         it("property from .properties") {

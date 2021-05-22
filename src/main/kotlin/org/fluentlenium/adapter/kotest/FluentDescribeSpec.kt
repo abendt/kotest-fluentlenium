@@ -23,8 +23,11 @@ abstract class FluentDescribeSpec internal constructor(private val fluentAdapter
         body()
     }
 
-    override fun getConfiguration(): Configuration =
-            ConfigurationFactoryProvider.newConfiguration(javaClass)
+    private val config: Configuration by lazy {
+        ConfigurationFactoryProvider.newConfiguration(javaClass)
+    }
+
+    override fun getConfiguration(): Configuration = config
 
     override fun getTestClass(): Class<*> = javaClass
 

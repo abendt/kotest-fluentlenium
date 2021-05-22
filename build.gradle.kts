@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.21"
-    id("com.adarshr.test-logger") version "2.1.1"
+    kotlin("jvm") version "1.5.0"
+    id("com.adarshr.test-logger") version "3.0.0"
 }
 
 val isIdea = System.getProperty("idea.version") != null
@@ -10,18 +10,18 @@ val isIdea = System.getProperty("idea.version") != null
 testlogger {
     // idea can't handle ANSI output
     setTheme(if (isIdea) "plain" else "mocha")
-    isShowFullStackTraces = false
+    showFullStackTraces = false
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = "1.8"
-        apiVersion = "1.4"
-        languageVersion = "1.4"
+        apiVersion = "1.5"
+        languageVersion = "1.5"
         freeCompilerArgs = listOf("-Xjsr305=strict", "-progressive")
     }
 }
@@ -36,14 +36,14 @@ tasks.withType<Test>().configureEach {
 }
 
 dependencies {
-    api("org.fluentlenium:fluentlenium-core:4.5.1")
+    api("org.fluentlenium:fluentlenium-core:4.6.2")
 
-    val kotlinTestVersion = "4.3.2"
+    val kotlinTestVersion = "4.6.0"
     api("io.kotest:kotest-runner-junit5:$kotlinTestVersion")
 
     implementation(kotlin("stdlib-jdk8"))
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:4.3.1")
+    testImplementation("io.github.bonigarcia:webdrivermanager:4.4.3")
     testImplementation("org.seleniumhq.selenium:selenium-api:3.141.59")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:3.141.59")
 
