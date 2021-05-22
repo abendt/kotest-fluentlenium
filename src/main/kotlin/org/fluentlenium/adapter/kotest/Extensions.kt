@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement
 fun <E : FluentWebElement> SearchControl<E>.jq(selector: String, vararg filter: SearchFilter): FluentList<E> =
         `$`(selector, *filter)
 
-fun <E : FluentWebElement> SearchControl<E>.jq(rawElements: MutableList<WebElement>): FluentList<E> =
+fun <E : FluentWebElement> SearchControl<E>.jq(rawElements: List<WebElement>): FluentList<E> =
         `$`(rawElements)
 
 fun <E : FluentWebElement> SearchControl<E>.jq(vararg filters: SearchFilter): FluentList<E> =
