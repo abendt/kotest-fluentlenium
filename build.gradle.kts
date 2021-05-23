@@ -10,8 +10,13 @@ val isIdea = System.getProperty("idea.version") != null
 testlogger {
     // idea can't handle ANSI output
     setTheme(if (isIdea) "plain" else "mocha")
-    showFullStackTraces = false
+
+    showFullStackTraces = true
+    showCauses = true
+    showExceptions = true
 }
+
+
 
 repositories {
     mavenCentral()

@@ -5,6 +5,7 @@ import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 import io.kotest.core.test.TestStatus
+import io.kotest.core.test.TestType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.fluentlenium.adapter.DefaultSharedMutator
@@ -18,7 +19,9 @@ import org.fluentlenium.configuration.ConfigurationProperties
 import org.fluentlenium.utils.ScreenshotUtil
 import java.util.concurrent.atomic.AtomicReference
 
-internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () -> Configuration = { throw IllegalStateException() }) : IFluentAdapter, FluentAdapter() {
+internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () -> Configuration = { throw IllegalStateException() }) :
+    IFluentAdapter,
+    FluentAdapter() {
 
     val sharedMutator = DefaultSharedMutator()
 
@@ -45,6 +48,9 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
         }
 
         override suspend fun beforeTest(testCase: TestCase) {
+            if (testCase.type == TestType.Container)
+                return
+
             val thisListener = this
             val testClass = testCase.spec.javaClass
             val testName = testCase.displayName
@@ -53,12 +59,12 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
             val driver = withContext(Dispatchers.IO) {
                 getTestDriver(
-                        testCase.spec.javaClass,
-                        testName,
-                        ::newWebDriver,
-                        thisListener::failed,
-                        configuration,
-                        sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle)
+                    testCase.spec.javaClass,
+                    testName,
+                    ::newWebDriver,
+                    thisListener::failed,
+                    configuration,
+                    sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle)
                 )
             }
             initFluent(driver.driver)
@@ -75,7 +81,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
                 }
 
                 val sharedWebDriver = SharedWebDriverContainer.INSTANCE
-                        .getDriver(sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
+                    .getDriver(sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
 
                 quitMethodAndThreadDrivers(driverLifecycle, sharedWebDriver)
                 deleteCookies(sharedWebDriver, configuration)
@@ -94,6 +100,12 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
         override suspend fun afterSpec(spec: Spec) {
             FluentTestRunnerAdapter.classDriverCleanup(spec.javaClass)
+        }
+    }
+
+    fun checkInsideTest() {
+        if (currentTestName.get() == null) {
+            throw IllegalStateException("Browser not started! make sure you are using Fluentlenium only in in the inermost test!")
         }
     }
 }
