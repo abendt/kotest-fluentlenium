@@ -8,10 +8,12 @@ import org.fluentlenium.adapter.kotest.internal.KoTestFluentAdapter
 import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.configuration.ConfigurationFactoryProvider
 
-abstract class FluentFunSpec internal constructor(private val fluentAdapter: KoTestFluentAdapter,
-                                                  body: FluentFunSpec.() -> Unit = {}) : FunSpec({ }),
-        IFluentAdapter by fluentAdapter,
-        TestRunnerAdapter {
+abstract class FluentFunSpec internal constructor(
+    private val fluentAdapter: KoTestFluentAdapter,
+    body: FluentFunSpec.() -> Unit = {}
+) : FunSpec({ }),
+    IFluentAdapter by fluentAdapter,
+    TestRunnerAdapter {
 
     constructor(body: FluentFunSpec.() -> Unit = {}) : this(KoTestFluentAdapter(), body)
 
@@ -32,10 +34,10 @@ abstract class FluentFunSpec internal constructor(private val fluentAdapter: KoT
     override fun getTestClass(): Class<*> = javaClass
 
     override fun getTestMethodName(): String =
-            fluentAdapter.currentTestName.get()
+        fluentAdapter.currentTestName.get()
 
     override fun <T : Annotation?> getClassAnnotation(annotation: Class<T>?): T =
-            javaClass.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
+        javaClass.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
 
     override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>?): T {
         throw AnnotationNotFoundException()
