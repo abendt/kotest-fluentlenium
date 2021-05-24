@@ -3,6 +3,8 @@ kotest-fluentlenium
 
 Fluentlenium [Kotest](https://kotest.io/) support
 
+# Writing tests
+
 supported Kotest [testing styles](https://kotest.io/docs/framework/testing-styles.html):
 
 * [Fun Spec](./src/test/kotlin/org/fluentlenium/adapter/kotest/funspec/ExampleFunSpec.kt)
@@ -14,3 +16,8 @@ supported Kotest [testing styles](https://kotest.io/docs/framework/testing-style
 * [Feature Spec](./src/test/kotlin/org/fluentlenium/adapter/kotest/featurespec/ExampleFeatureSpec.kt)
 * [Expect Spec](./src/test/kotlin/org/fluentlenium/adapter/kotest/expectspec/ExampleExpectSpec.kt)
 * [Annotation Spec](./src/test/kotlin/org/fluentlenium/adapter/kotest/annotationspec/ExampleAnnotationSpec.kt)
+
+# Extension functions
+
+In Kotlin usage of the fluentlenium method [$](https://fluentlenium.com/javadoc/org/fluentlenium/core/search/SearchControl.html#$(org.fluentlenium.core.search.SearchFilter...)) method
+must be escaped. As an alternative this library offers the extension function `jq`.

@@ -2,8 +2,6 @@ package org.fluentlenium.adapter.kotest.behaviorspec
 
 import io.kotest.matchers.string.shouldContain
 import org.fluentlenium.adapter.kotest.FluentBehaviorSpec
-import org.fluentlenium.adapter.kotest.FluentFunSpec
-import org.fluentlenium.adapter.kotest.FluentShouldSpec
 import org.fluentlenium.adapter.kotest.jq
 
 class ExampleBehaviorSpec : FluentBehaviorSpec({

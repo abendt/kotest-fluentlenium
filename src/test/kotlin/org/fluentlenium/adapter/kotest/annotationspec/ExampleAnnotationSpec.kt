@@ -7,9 +7,9 @@ import org.fluentlenium.adapter.kotest.jq
 class ExampleAnnotationSpec : FluentAnnotationSpec() {
     @Test
     fun queryDuckDuckGo() {
-        goTo("https://duckduckgo.com");
-        jq("#search_form_input_homepage").fill().with("FluentLenium");
-        jq("#search_button_homepage").submit();
-        window().title() shouldContain  "FluentLenium"
+        goTo("https://duckduckgo.com")
+        jq("#search_form_input_homepage").fill().with("FluentLenium")
+        jq("#search_button_homepage").submit()
+        window().title() shouldContain "FluentLenium"
     }
 }

@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.5.0"
     id("com.adarshr.test-logger") version "3.0.0"
+    id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
 }
 
 val isIdea = System.getProperty("idea.version") != null
@@ -16,7 +17,9 @@ testlogger {
     showExceptions = true
 }
 
-
+ktlint {
+    disabledRules.set(setOf("import-ordering", "no-wildcard-imports"))
+}
 
 repositories {
     mavenCentral()
@@ -35,8 +38,8 @@ tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 
     systemProperty(
-            "fluentlenium.capabilities",
-            """{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}"""
+        "fluentlenium.capabilities",
+        """{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}"""
     )
 }
 
