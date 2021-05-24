@@ -2,8 +2,6 @@ package org.fluentlenium.adapter.kotest.freespec
 
 import io.kotest.matchers.string.shouldContain
 import org.fluentlenium.adapter.kotest.FluentFreeSpec
-import org.fluentlenium.adapter.kotest.FluentFunSpec
-import org.fluentlenium.adapter.kotest.FluentShouldSpec
 import org.fluentlenium.adapter.kotest.jq
 
 class ExampleFreeSpec : FluentFreeSpec({

@@ -12,7 +12,8 @@ import org.fluentlenium.core.inject.ContainerFluentControl
 abstract class FluentFreeSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
     body: FluentFreeSpec.() -> Unit = {}
-) : FreeSpec({}), IFluentAdapter by fluentAdapter,
+) : FreeSpec({}),
+    IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {
 
     constructor(body: FluentFreeSpec.() -> Unit = {}) : this(KoTestFluentAdapter(), body)

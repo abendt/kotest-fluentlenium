@@ -2,7 +2,6 @@ package org.fluentlenium.adapter.kotest.expectspec
 
 import io.kotest.matchers.string.shouldContain
 import org.fluentlenium.adapter.kotest.FluentExpectSpec
-import org.fluentlenium.adapter.kotest.FluentFunSpec
 import org.fluentlenium.adapter.kotest.jq
 
 class ExampleExpectSpec : FluentExpectSpec({

@@ -32,7 +32,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
      */
     val currentTestName = AtomicReference<String>()
 
-    val configurationOverride: Configuration by lazy { useConfigurationOverride() }
+    private val configurationOverride: Configuration by lazy { useConfigurationOverride() }
 
     override fun getConfiguration(): Configuration = configurationOverride
 
@@ -113,7 +113,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     fun ensureTestStarted() {
         if (currentTestName.get() == null) {
-            throw IllegalStateException("Fluentlenium is not available! make sure you are using Fluentlenium only in in the inermost test block!")
+            throw IllegalStateException("FluentLenium is not yet available! Make sure to use FluentLenium only within the innermost Kotest test block!")
         }
     }
 }

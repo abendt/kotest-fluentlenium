@@ -1,7 +1,6 @@
 package org.fluentlenium.adapter.kotest.shouldspec
 
 import io.kotest.matchers.string.shouldContain
-import org.fluentlenium.adapter.kotest.FluentFunSpec
 import org.fluentlenium.adapter.kotest.FluentShouldSpec
 import org.fluentlenium.adapter.kotest.jq
 

@@ -12,7 +12,8 @@ import org.fluentlenium.core.inject.ContainerFluentControl
 abstract class FluentBehaviorSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
     body: FluentBehaviorSpec.() -> Unit = {}
-) : BehaviorSpec({}), IFluentAdapter by fluentAdapter,
+) : BehaviorSpec({}),
+    IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {
 
     constructor(body: FluentBehaviorSpec.() -> Unit = {}) : this(KoTestFluentAdapter(), body)

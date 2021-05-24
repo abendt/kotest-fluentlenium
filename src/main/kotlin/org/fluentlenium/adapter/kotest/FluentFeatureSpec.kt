@@ -1,7 +1,6 @@
 package org.fluentlenium.adapter.kotest
 
 import io.kotest.core.spec.style.FeatureSpec
-import io.kotest.core.spec.style.FreeSpec
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.TestRunnerAdapter
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException
@@ -13,7 +12,8 @@ import org.fluentlenium.core.inject.ContainerFluentControl
 abstract class FluentFeatureSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
     body: FluentFeatureSpec.() -> Unit = {}
-) : FeatureSpec({}), IFluentAdapter by fluentAdapter,
+) : FeatureSpec({}),
+    IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {
 
     constructor(body: FluentFeatureSpec.() -> Unit = {}) : this(KoTestFluentAdapter(), body)
