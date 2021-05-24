@@ -1,7 +1,6 @@
 package org.fluentlenium.adapter.kotest
 
 import io.kotest.core.spec.style.ShouldSpec
-import io.kotest.core.spec.style.StringSpec
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.TestRunnerAdapter
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException
@@ -45,7 +44,7 @@ abstract class FluentShouldSpec internal constructor(
     }
 
     override fun getFluentControl(): ContainerFluentControl {
-        fluentAdapter.checkInsideTest()
+        fluentAdapter.ensureTestStarted()
 
         return super.getFluentControl()
     }

@@ -1,7 +1,5 @@
 package org.fluentlenium.adapter.kotest
 
-import io.kotest.core.spec.style.ShouldSpec
-import io.kotest.core.spec.style.StringSpec
 import io.kotest.core.spec.style.WordSpec
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.TestRunnerAdapter
@@ -9,6 +7,7 @@ import org.fluentlenium.adapter.exception.AnnotationNotFoundException
 import org.fluentlenium.adapter.kotest.internal.KoTestFluentAdapter
 import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.configuration.ConfigurationFactoryProvider
+import org.fluentlenium.core.inject.ContainerFluentControl
 
 abstract class FluentWordSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
@@ -42,5 +41,11 @@ abstract class FluentWordSpec internal constructor(
 
     override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>?): T {
         throw AnnotationNotFoundException()
+    }
+
+    override fun getFluentControl(): ContainerFluentControl {
+        fluentAdapter.ensureTestStarted()
+
+        return super.getFluentControl()
     }
 }

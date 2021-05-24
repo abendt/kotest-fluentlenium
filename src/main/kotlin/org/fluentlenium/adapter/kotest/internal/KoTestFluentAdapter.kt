@@ -17,6 +17,7 @@ import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
 import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.configuration.ConfigurationProperties
 import org.fluentlenium.utils.ScreenshotUtil
+import org.fluentlenium.utils.SeleniumVersionChecker
 import java.util.concurrent.atomic.AtomicReference
 
 internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () -> Configuration = { throw IllegalStateException() }) :
@@ -43,7 +44,11 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
                 // could be possible that the "same" thread executes mulitple tests and/or that one test is executed
                 // by mulitple Coroutines with different underlying Threads. need to investigate
 
-                throw IllegalArgumentException("DriverLifecyle $driverLifecycle will prohably not work as expected!")
+                throw IllegalArgumentException("DriverLifecyle $driverLifecycle not supported")
+            }
+
+            withContext(Dispatchers.IO) {
+                SeleniumVersionChecker.checkSeleniumVersion()
             }
         }
 
@@ -71,6 +76,9 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
         }
 
         override suspend fun afterTest(testCase: TestCase, result: TestResult) {
+
+            if (testCase.type == TestType.Container)
+                return
 
             val testClass = testCase.spec.javaClass
             val testName = testCase.displayName
@@ -103,9 +111,9 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
         }
     }
 
-    fun checkInsideTest() {
+    fun ensureTestStarted() {
         if (currentTestName.get() == null) {
-            throw IllegalStateException("Browser not started! make sure you are using Fluentlenium only in in the inermost test!")
+            throw IllegalStateException("Fluentlenium is not available! make sure you are using Fluentlenium only in in the inermost test block!")
         }
     }
 }

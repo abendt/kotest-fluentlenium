@@ -1,7 +1,6 @@
 package org.fluentlenium.adapter.kotest
 
 import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.core.spec.style.ShouldSpec
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.TestRunnerAdapter
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException
@@ -42,5 +41,11 @@ abstract class FluentBehaviorSpec internal constructor(
 
     override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>?): T {
         throw AnnotationNotFoundException()
+    }
+
+    override fun getFluentControl(): ContainerFluentControl {
+        fluentAdapter.ensureTestStarted()
+
+        return super.getFluentControl()
     }
 }
