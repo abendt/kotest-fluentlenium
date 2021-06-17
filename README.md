@@ -1,3 +1,5 @@
+This code was contributed to Fluentlenium https://github.com/FluentLenium/FluentLenium/issues/1250
+
 kotest-fluentlenium
 ===================
 
